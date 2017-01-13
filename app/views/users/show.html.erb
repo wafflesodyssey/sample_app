@@ -1,4 +1,6 @@
 <%= @user.name %>, <%= @user.email %>, <%= @user.created_at %>, <%= @user.updated_at %>
+<%= Time.now %>  <%# adding to show current time on user page %>
+
 
 <% provide(:title, @user.name) %>
 <div class="row">
