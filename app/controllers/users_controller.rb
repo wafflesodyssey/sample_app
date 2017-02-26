@@ -18,9 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)    #returns appropriate initialization hash
     if @user.save #if successful with valid signup data, will save
-      log_in @user # calls to log_in, having user automatically login after signing up.
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user #render's template for create action. common convention redirecting to newly created user's profile when successful
+      UserMailer.account_activation(@user).deliver_now 
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
