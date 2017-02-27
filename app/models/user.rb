@@ -11,6 +11,17 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  # Activates an account.
+    def activate
+      update_attribute(:activated,     true)
+      update_attribute(:activated_at, Time.zone.now)
+    end
+
+    # Sends activation email.
+    def send_activation_email
+      UserMailer.account_activation(self).deliver_now
+    end
+
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
