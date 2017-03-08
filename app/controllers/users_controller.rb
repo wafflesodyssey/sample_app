@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)    #returns appropriate initialization hash
+    @user = User.new(user_params)  
     if @user.save #if successful with valid signup data, will save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
